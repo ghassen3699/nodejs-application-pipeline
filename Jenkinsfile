@@ -1,34 +1,19 @@
 pipeline{
     agent any
     stages{
-        stage('build'){
+        stage('build image'){
             steps{
                 script{
-                    echo "build project"
+                    echo "build image"
+                    sh "docker build -t nodejs-app:1.0 ."
                 }
             }
         }
 
-        stage('test'){
+        stage('deploy image'){
             steps{
                 script{
-                    echo "test project"
-                }
-            }
-        }
-
-        stage('create image'){
-            steps{
-                script{
-                    echo "create image"
-                }
-            }
-        }
-
-        stage('deploy'){
-            steps{
-                script{
-                    echo "deploy project"
+                    echo "deploy image"
                 }
             }
         }
