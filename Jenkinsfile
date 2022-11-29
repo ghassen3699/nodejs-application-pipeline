@@ -6,9 +6,14 @@ pipeline{
                 script{
                     echo "deploy image"
                     withCredentials([usernamePassword(credentialsId: 'docker_cred', passwordVariable: 'PASS', usernameVariable:'USER')]){
+                        
+                        
+                        
+                    }
+                    withCredentials([string(credentialsId:'docker_cred',variable:'dockerhubpwd')]){
                         sh 'docker build -t ghassenkhamassi/nodejs-application:1.0 .'
-                        sh "docker login -u $USER -p $PASS"
-                        sh 'docker push ghassenkhamassi/nodejs-application:tagname'
+                        sh "docker login -u ghassenKhamassi -p ${dockerhubpwd}"
+                        sh 'docker push ghassenkhamassi/nodejs-application:1.0'
                     }
                 }
             }
